@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class KissDataJava {
@@ -118,7 +119,6 @@ public class KissDataJava {
 			
 			String[] ruleLocation = lineRules[1].split(":");
 			int[] formLocation = {Integer.parseInt(ruleLocation[0]), Integer.parseInt(ruleLocation[1])};
-			System.out.println(lineRules[0] + ": " + formLocation[0] + " " + formLocation[1]);
 			locations.add(formLocation);
 			
 			
@@ -221,6 +221,8 @@ public class KissDataJava {
 		
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Choose Config File");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt", "text");
+		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			return chooser.getSelectedFile();
 		}
@@ -233,10 +235,21 @@ public class KissDataJava {
 	public static File saveData() {
 		
 		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv", "comma seperated values");
+		chooser.setFileFilter(filter);
 		chooser.setDialogTitle("Choose CSV Location");
 		
 		if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			return chooser.getSelectedFile();
+			
+			File file = chooser.getSelectedFile();
+			if (file.getName().contains(".csv")) {
+			    // filename is OK as-is
+			} else {
+			    file = new File(file.toString() + ".csv");
+			}
+			
+			
+			return file;
 		}
 		
 		return null;
