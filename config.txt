@@ -1,0 +1,4 @@
+sex 69:70 
+month 65:67
+age 79:81 01=<1,02=1-4,03=5-14,04=15-24,05=25-34,06=35-44,07=45-54,08=55-64,09=65-74,10=75-84,11=85+,12=Unknown
+education 63:64 1=<_8th_grade,2=9-12th_no_diploma,3=High_School_Graduate,4=College_Credit,5=Associates,6=Bachelors,7=Masters,9=Unknown
