@@ -8,13 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 public class KissDataJava {
 	
@@ -30,6 +27,7 @@ public class KissDataJava {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container pane = frame.getContentPane();
 		pane.setLayout(new FlowLayout(FlowLayout.CENTER));
+		FileManager fileMan = new FileManager();
 		
 		
 		JButton dataFileButton = new JButton("Select Data File");
@@ -52,7 +50,7 @@ public class KissDataJava {
 		
 		
 		dataFileButton.addActionListener(e -> {
-			dataFile = getDataSetFile();
+			dataFile = fileMan.getDataSetFile();
 			
 			if(dataFile != null) {
 				dataFileLabel.setText(dataFile.getAbsolutePath());
@@ -66,7 +64,7 @@ public class KissDataJava {
 		});
 		
 		configFileButton.addActionListener(e -> {
-			configFile = getConfigSetFile();
+			configFile = fileMan.getConfigSetFile();
 			if(configFile != null) {
 				configFileLabel.setText(configFile.getAbsolutePath());
 				frame.pack();
@@ -77,7 +75,7 @@ public class KissDataJava {
 		});
 		
 		selectSaveFileButton.addActionListener(e -> {
-			saveFile = saveData();
+			saveFile = fileMan.saveData();
 			if(saveFile != null) {
 				saveFileLabel.setText(saveFile.getAbsolutePath());
 				frame.pack();
@@ -201,59 +199,6 @@ public class KissDataJava {
 		in.close();
 		pw.close();
 		JOptionPane.showMessageDialog(null, "Done");
-	}
-	
-	public static File getDataSetFile() {
-		
-		
-		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Choose Dataset File");
-		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			return chooser.getSelectedFile();
-		}
-		
-		return null;
-		
-	}
-	
-	public static File getConfigSetFile() {
-		
-		
-		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Choose Config File");
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt", "text");
-		chooser.setFileFilter(filter);
-		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			return chooser.getSelectedFile();
-		}
-		
-		return null;
-		
-	}
-	
-	
-	public static File saveData() {
-		
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv", "comma seperated values");
-		chooser.setFileFilter(filter);
-		chooser.setDialogTitle("Choose CSV Location");
-		
-		if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			
-			File file = chooser.getSelectedFile();
-			if (file.getName().contains(".csv")) {
-			    // filename is OK as-is
-			} else {
-			    file = new File(file.toString() + ".csv");
-			}
-			
-			
-			return file;
-		}
-		
-		return null;
-		
 	}
 	
 	public void buttonClicked(ActionEvent e) {
