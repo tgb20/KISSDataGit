@@ -11,9 +11,9 @@ The first is a local copy of the CDC Mortality Dataset, which can be found [here
 ### Config File
 The second is a config file for the data you wish to extract. You will need the key for the data, which can be found [here](https://www.cdc.gov/nchs/nvss/mortality_public_use_data.htm), and a .txt file which will contain your configuration.
 
-The first row in the .txt file is the ICD-10 Codes you wish to search for seperated by a space.
+The first line in the .txt file is the ICD-10 Codes you wish to search for seperated by a space. These codes can be searched for [here](https://icdcodelookup.com/icd-10/codes).
 ```
-X40 X41 X42
+CODE1 CODE2 CODE3
 ```
 
 After that you need to create a line for each column you wish to create in the csv.
