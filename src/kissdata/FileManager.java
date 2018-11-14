@@ -81,8 +81,8 @@ public class FileManager {
 		// Read Config File
 		Scanner conf = new Scanner(fileWithConfig);
 		
-		
-		
+		String rawCauses = conf.nextLine();
+		String[] causes = rawCauses.split(" ");
 		
 		
 		while(conf.hasNextLine()) {
@@ -135,10 +135,21 @@ public class FileManager {
 		int id = 0;
 		while(in.hasNextLine()) {
 			String readLine = in.nextLine();
-			
+			boolean hasCause = false;
 			// Process Data
 			String cause = readLine.substring(144, 148);
-			if(cause.contains("X40") || cause.contains("X41") || cause.contains("X42") || cause.contains("X43") || cause.contains("X44")) {
+			
+			
+			for(String testCause: causes) {
+				if(cause.contains(testCause)) {
+					hasCause = true;
+				}
+			}
+			
+			
+			
+			
+			if(hasCause) {
 				
 				sb.append(id);
 				sb.append(',');
